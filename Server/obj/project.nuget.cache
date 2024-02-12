@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+NJZfgV70g5EYgg1JiLch3EBmB6A3rSJeagpm8mWFzdzSu6/quqEH1OcNuJnP4xug0E3QmboSsISCZ84Mbx/AA==",
+  "dgSpecHash": "RvAG/DvFltE4oeQbw7ZISJTeD2sPyWGCXQdwD8yJdLqulJUd5o7KEMm6ivHefnRGH/8NE6DuGQcUmpVj18ab4Q==",
   "success": true,
-  "projectFilePath": "D:\\repos\\ClientServerProj\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\Server.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

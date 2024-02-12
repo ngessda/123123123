@@ -10,9 +10,13 @@ namespace Server
 {
     public class SimpleServer
     {
-        private int port = 80;
+        private Thread t = null;
+        private object locker = new object();
+        private int port = 1488;
         private string host = "localhost";
         private Socket serverSocket;
+        private bool flag = false;
+        private Socket clientSocket;
 
         public SimpleServer()
         {
@@ -30,7 +34,7 @@ namespace Server
                         Console.WriteLine("Сокет связан с {0}:{1}", addr, port);
                         break;
                     }
-                    catch
+                    catch(Exception ex)
                     {
                         Console.WriteLine("Не удалось связать сокет с {0}:{1}", addr, port);
                     }
@@ -46,31 +50,42 @@ namespace Server
         {
             if(serverSocket != null)
             {
-                serverSocket.Listen(port);
+                serverSocket.Listen(10);
                 Console.WriteLine("Началось прослушивание");
                 while(true)
                 {
                     Console.WriteLine("Ожидание нового подключения");
-                    var clientSocket = serverSocket.Accept();
+                    clientSocket = serverSocket.Accept();
                     Console.WriteLine("Соединение с клиентом установлена");
-
-                    var request = ReceiveData(clientSocket);
-                    Console.WriteLine("Получено сообщение от клиента: {0}", request);
-
-                    string response = "Получено " + request.Length.ToString() + " символов";
-
-                    clientSocket.Close();
-
-                    if (request.Trim().ToLower() == "stop")
+                    t = new Thread(ThreadOnServer);
+                    t.Start();
+                    if (flag)
                     {
                         Console.WriteLine("Была получена команда stop - сервер завершает свою работу");
-                        break;
+                        //break;
                     }
                 }
             }
             Console.WriteLine("Сервер завершил свою работу");
         }
-        public string ReceiveData(Socket clientSocket)
+
+        private void ThreadOnServer()
+        {
+            var request = ReceiveData(clientSocket);
+            Console.WriteLine("Получено сообщение от клиента: {0}", request);
+
+            string response = "Получено " + request.Length.ToString() + " символов";
+            SendData(clientSocket, response);
+
+            clientSocket.Close();
+
+            if (request.Trim().ToLower() == "stop")
+            {
+                flag = true;
+            }
+        }
+
+        private string ReceiveData(Socket clientSocket)
         {
             var buffer = new byte[1024];
             var count = clientSocket.Receive(buffer);
@@ -79,7 +94,7 @@ namespace Server
             return result;
         }
 
-        public void SendData(Socket clientSocket, String data)
+        private void SendData(Socket clientSocket, String data)
         {
             byte[] replyBuffer = Encoding.UTF8.GetBytes(data);
             clientSocket.Send(replyBuffer);

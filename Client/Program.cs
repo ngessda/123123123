@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using Client;
+
+SimpleClient client = new SimpleClient("localhost", 1488);
+client.Start();
