@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\Server.csproj": {}
+    "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\Server.csproj": {
+    "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\Server.csproj",
+        "projectPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\BIAdmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BIAdmin\\Source\\Repos\\ClientServerApp\\Server\\obj\\",
+        "outputPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

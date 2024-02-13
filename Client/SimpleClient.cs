@@ -12,6 +12,7 @@ namespace Client
         private string host;
         private int port;
         private Socket clientSocket;
+        public bool ClientFlag { get; private set; } = false;
 
         public SimpleClient(string serverHost, int serverPort)
         {
@@ -32,18 +33,28 @@ namespace Client
 
         public void Start()
         {
-            Console.Write("Введите сообщение: ");
-            string? message = Console.ReadLine();
-            if(message != null && clientSocket != null)
+            while (true)
             {
-                SendData(clientSocket, message);
-                var result = ReceiveData(clientSocket);
-                Console.WriteLine("Получено сообщение от сервера: {0}", result);
-                clientSocket.Close();
-                Console.WriteLine("Соединение закрыто");
+                clientSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+                clientSocket.Connect(host, port);
+                Console.Write("Введите сообщение: ");
+                string? message = Console.ReadLine();
+                if (message != null && clientSocket != null && message.Trim().ToLower() != "quit")
+                {
+                    SendData(clientSocket, message);
+                    var result = ReceiveData(clientSocket);
+                    Console.WriteLine("Получено сообщение от сервера: {0}", result);
+                }
+                else
+                {
+                    ClientFlag = true;
+                    clientSocket.Close();
+                    Console.WriteLine("Соединение закрыто");
+                    Console.WriteLine("Клиент завершил свою работу");
+                    break;
+                }
             }
-            Console.WriteLine("Клиент завершил свою работу");
-        }
+        } 
 
         public string ReceiveData(Socket clientSocket)
         {

@@ -62,7 +62,7 @@ namespace Server
                     if (flag)
                     {
                         Console.WriteLine("Была получена команда stop - сервер завершает свою работу");
-                        //break;
+                        break;
                     }
                 }
             }
@@ -76,8 +76,10 @@ namespace Server
 
             string response = "Получено " + request.Length.ToString() + " символов";
             SendData(clientSocket, response);
-
-            clientSocket.Close();
+            if (request.Trim().ToLower() == "quit")
+            {
+                clientSocket.Close();
+            }
 
             if (request.Trim().ToLower() == "stop")
             {
