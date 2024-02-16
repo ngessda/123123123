@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,8 +16,9 @@ namespace Server
         private int port = 1488;
         private string host = "localhost";
         private Socket serverSocket;
-        private bool flag = false;
-        private Socket clientSocket;
+        private int id = 1;
+
+        private Dictionary<int, Socket> clients = new Dictionary<int, Socket>();
 
         public SimpleServer()
         {
@@ -52,39 +54,74 @@ namespace Server
             {
                 serverSocket.Listen(10);
                 Console.WriteLine("Началось прослушивание");
-                while(true)
+
+                Thread acceptingThread = new Thread(() =>
                 {
-                    Console.WriteLine("Ожидание нового подключения");
-                    clientSocket = serverSocket.Accept();
-                    Console.WriteLine("Соединение с клиентом установлена");
-                    t = new Thread(ThreadOnServer);
-                    t.Start();
-                    if (flag)
+                    while (true)
                     {
-                        Console.WriteLine("Была получена команда stop - сервер завершает свою работу");
-                        break;
+                        Console.WriteLine("Ожидание нового подключения");
+                        var clientSocket = serverSocket.Accept();
+                        Console.WriteLine("Соединение с клиентом установлена");
+
+                        lock (clients)
+                        {
+                            clients.Add(id, clientSocket);
+                            id++;
+                        }
+
+                        Communicate(clientSocket);
                     }
-                }
+                });
+
+                acceptingThread.Start();
             }
             Console.WriteLine("Сервер завершил свою работу");
         }
 
-        private void ThreadOnServer()
+        private void Communicate(Socket clientSocket)
         {
-            var request = ReceiveData(clientSocket);
-            Console.WriteLine("Получено сообщение от клиента: {0}", request);
-
-            string response = "Получено " + request.Length.ToString() + " символов";
-            SendData(clientSocket, response);
-            if (request.Trim().ToLower() == "quit")
+            Thread servingThread = new Thread(() =>
             {
-                clientSocket.Close();
-            }
+                while (true)
+                {
+                    try
+                    {
+                        string message = ReceiveData(clientSocket);
 
-            if (request.Trim().ToLower() == "stop")
-            {
-                flag = true;
-            }
+                        if (message == string.Empty)
+                        {
+                            lock (clients)
+                            {
+                                clients.Remove(id);
+                            }
+                            clientSocket.Close();
+                            Console.WriteLine("[Client]: отключен");
+                            break;
+                        }
+                        message = message.Trim();
+                        Console.WriteLine("[Client]: {0}", message);
+
+                        if (message == "quit")
+                        {
+                            lock (clients)
+                            {
+                                clients.Remove(id);
+                            }
+                            SendData(clientSocket, "shutdown");
+                            clientSocket.Close();
+                            Console.WriteLine("[Client]: отключен");
+                            break;
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("[Error]: не удалось получить данные");
+                        break;
+                    }
+
+                }
+            });
+            servingThread.Start();
         }
 
         private string ReceiveData(Socket clientSocket)
