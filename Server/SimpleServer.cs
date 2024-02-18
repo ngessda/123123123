@@ -69,7 +69,7 @@ namespace Server
                             id++;
                         }
 
-                        Communicate(clientSocket);
+                        Communicate(clientSocket, id);
                     }
                 });
 
@@ -78,7 +78,7 @@ namespace Server
             Console.WriteLine("Сервер завершил свою работу");
         }
 
-        private void Communicate(Socket clientSocket)
+        private void Communicate(Socket clientSocket, int _id)
         {
             Thread servingThread = new Thread(() =>
             {
@@ -92,7 +92,7 @@ namespace Server
                         {
                             lock (clients)
                             {
-                                clients.Remove(id);
+                                clients.Remove(_id);
                             }
                             clientSocket.Close();
                             Console.WriteLine("[Client]: отключен");
@@ -105,7 +105,7 @@ namespace Server
                         {
                             lock (clients)
                             {
-                                clients.Remove(id);
+                                clients.Remove(_id);
                             }
                             SendData(clientSocket, "shutdown");
                             clientSocket.Close();

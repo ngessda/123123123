@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Client\\Client.csproj": {}
+    "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Client\\Client.csproj": {
+    "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\BIAdmin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Client\\obj\\",
+        "projectPath": "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\micky\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\micky\\Source\\Repos\\ClientServerApp5\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\BIAdmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\micky\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
