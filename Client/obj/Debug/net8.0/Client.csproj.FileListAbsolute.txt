@@ -13,3 +13,7 @@ C:\Users\BIAdmin\Source\Repos\ClientServerApp\Client\obj\Debug\net8.0\refint\Cli
 C:\Users\BIAdmin\Source\Repos\ClientServerApp\Client\obj\Debug\net8.0\Client.pdb
 C:\Users\BIAdmin\Source\Repos\ClientServerApp\Client\obj\Debug\net8.0\Client.genruntimeconfig.cache
 C:\Users\BIAdmin\Source\Repos\ClientServerApp\Client\obj\Debug\net8.0\ref\Client.dll
+C:\Users\BIAdmin\source\repos\ClientServerApp\Client\bin\Debug\net8.0\NetCommunication.dll
+C:\Users\BIAdmin\source\repos\ClientServerApp\Client\bin\Debug\net8.0\NetCommunication.pdb
+C:\Users\BIAdmin\source\repos\ClientServerApp\Client\obj\Debug\net8.0\Client.csproj.AssemblyReference.cache
+C:\Users\BIAdmin\source\repos\ClientServerApp\Client\obj\Debug\net8.0\Client.csproj.CopyComplete

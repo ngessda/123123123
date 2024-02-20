@@ -18,7 +18,6 @@ namespace Server
         private Socket serverSocket;
         private int id = 1;
 
-        private Dictionary<int, Socket> clients = new Dictionary<int, Socket>();
 
         public SimpleServer()
         {
@@ -63,80 +62,13 @@ namespace Server
                         var clientSocket = serverSocket.Accept();
                         Console.WriteLine("Соединение с клиентом установлена");
 
-                        lock (clients)
-                        {
-                            clients.Add(id, clientSocket);
-                            id++;
-                        }
-
-                        Communicate(clientSocket);
+                        new ConnectedClient(clientSocket, id).Start();
                     }
                 });
 
                 acceptingThread.Start();
             }
             Console.WriteLine("Сервер завершил свою работу");
-        }
-
-        private void Communicate(Socket clientSocket)
-        {
-            Thread servingThread = new Thread(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        string message = ReceiveData(clientSocket);
-
-                        if (message == string.Empty)
-                        {
-                            lock (clients)
-                            {
-                                clients.Remove(id);
-                            }
-                            clientSocket.Close();
-                            Console.WriteLine("[Client]: отключен");
-                            break;
-                        }
-                        message = message.Trim();
-                        Console.WriteLine("[Client]: {0}", message);
-
-                        if (message == "quit")
-                        {
-                            lock (clients)
-                            {
-                                clients.Remove(id);
-                            }
-                            SendData(clientSocket, "shutdown");
-                            clientSocket.Close();
-                            Console.WriteLine("[Client]: отключен");
-                            break;
-                        }
-                    }
-                    catch(Exception ex)
-                    {
-                        Console.WriteLine("[Error]: не удалось получить данные");
-                        break;
-                    }
-
-                }
-            });
-            servingThread.Start();
-        }
-
-        private string ReceiveData(Socket clientSocket)
-        {
-            var buffer = new byte[1024];
-            var count = clientSocket.Receive(buffer);
-            Console.WriteLine("Получено {0} байтов", count);
-            var result = Encoding.UTF8.GetString(buffer, 0, count);
-            return result;
-        }
-
-        private void SendData(Socket clientSocket, String data)
-        {
-            byte[] replyBuffer = Encoding.UTF8.GetBytes(data);
-            clientSocket.Send(replyBuffer);
         }
     }
 }

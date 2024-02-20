@@ -1,0 +1,12 @@
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\bin\Debug\net8.0\NetCommunication.deps.json
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\bin\Debug\net8.0\NetCommunication.dll
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\bin\Debug\net8.0\NetCommunication.pdb
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.AssemblyInfoInputs.cache
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.AssemblyInfo.cs
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.csproj.CoreCompileInputs.cache
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.sourcelink.json
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.dll
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\refint\NetCommunication.dll
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\NetCommunication.pdb
+C:\Users\BIAdmin\source\repos\ClientServerApp\NetCommunication\obj\Debug\net8.0\ref\NetCommunication.dll
