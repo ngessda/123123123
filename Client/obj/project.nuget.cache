@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "MFMlr1ARUPqbtCpTNkGRg21XE/itBMDn5yqUQsFJBNmIjSYw855aZATsAVlRmzG9YMcZut3DcUzLsUcRPwQGKw==",
+=======
+  "dgSpecHash": "SxsG38jlEYJFmkoay2Fa6qhHc6Yrs98Tg9nR06UQo015bQuwAbAjTNXomna+NxfmN/cV6l8EeKPXVJDt3QrXfw==",
+>>>>>>> fbbb354 (none)
   "success": true,
   "projectFilePath": "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Client\\Client.csproj",
   "expectedPackageFiles": [],

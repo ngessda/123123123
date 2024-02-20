@@ -18,7 +18,6 @@ namespace Server
         private Socket serverSocket;
         private int id = 1;
 
-        private Dictionary<int, Socket> clients = new Dictionary<int, Socket>();
 
         public SimpleServer()
         {
@@ -63,6 +62,7 @@ namespace Server
                         var clientSocket = serverSocket.Accept();
                         Console.WriteLine("Соединение с клиентом установлена");
 
+<<<<<<< HEAD
                         lock (clients)
                         {
                             clients.Add(id, clientSocket);
@@ -70,6 +70,9 @@ namespace Server
                         }
 
                         Communicate(clientSocket, id);
+=======
+                        new ConnectedClient(clientSocket, id).Start();
+>>>>>>> fbbb354 (none)
                     }
                 });
 
@@ -77,6 +80,7 @@ namespace Server
             }
             Console.WriteLine("Сервер завершил свою работу");
         }
+<<<<<<< HEAD
 
         private void Communicate(Socket clientSocket, int _id)
         {
@@ -138,5 +142,7 @@ namespace Server
             byte[] replyBuffer = Encoding.UTF8.GetBytes(data);
             clientSocket.Send(replyBuffer);
         }
+=======
+>>>>>>> fbbb354 (none)
     }
 }

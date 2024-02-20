@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "Server/1.0.0": {
+        "dependencies": {
+          "NetCommunication": "1.0.0"
+        },
         "runtime": {
           "Server.dll": {}
+        }
+      },
+      "NetCommunication/1.0.0": {
+        "runtime": {
+          "NetCommunication.dll": {}
         }
       }
     }
   },
   "libraries": {
     "Server/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NetCommunication/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
