@@ -11,7 +11,7 @@ namespace NetCommunication
         private bool _stopped = false;
         private bool Stopped
         {
-            get
+            get 
             {
                 lock (_lock)
                 {

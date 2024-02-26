@@ -1,12 +1,15 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "xd+o6Emh0Tt0C4QS8oy5P6jESbNsYHmNfqg3iQAkScDsLadG5ghd50j1pkgPOhB29d23LJ0V3fXcxeDpLzFqPg==",
-=======
   "dgSpecHash": "QK2uf1UE4v+4UqRtn8Bv3lEQhWvnHHPwNODPkfOGVg8gDAQTYtiLFfC7MRnuWPB2yIxHzXqsAxFNIa7fN0EaGw==",
->>>>>>> fbbb354 (none)
   "success": true,
-  "projectFilePath": "C:\\Users\\micky\\source\\repos\\ClientServerApp5\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Ошибка чтения файла кэша C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

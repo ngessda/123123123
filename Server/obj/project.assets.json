@@ -27,31 +27,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\micky\\.nuget\\packages\\": {},
+    "C:\\Users\\BIAdmin\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\micky\\Source\\Repos\\ClientServerApp5\\Server\\Server.csproj",
-      "projectName": "Server",
-      "projectPath": "C:\\Users\\micky\\Source\\Repos\\ClientServerApp5\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\micky\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\micky\\Source\\Repos\\ClientServerApp5\\Server\\obj\\",
-=======
       "projectUniqueName": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj",
       "projectName": "Server",
       "projectPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\BIAdmin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\obj\\",
->>>>>>> fbbb354 (none)
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\micky\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BIAdmin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -101,5 +93,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Ошибка чтения файла кэша C:\\Users\\BIAdmin\\source\\repos\\ClientServerApp\\Server\\obj\\project.nuget.cache: Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

@@ -82,7 +82,7 @@ namespace Client
 
                     if (message.ToLower() == "quit")
                     {
-                        clientSocket.Shutdown(SocketShutdown.Both);
+                        net.Stop();
                         Console.WriteLine("[Info]: завершение отправки сообщений");
                         break;
                     }
@@ -92,8 +92,11 @@ namespace Client
 
         public void Parse(string data)
         {
-            if (data == string.Empty || data == "shutdown") ;
-            net.Stop();
+            if (data == string.Empty || data == "shutdown")
+            {
+                Console.WriteLine("[Info]: завершение получения сообщений");
+                net.Stop();
+            }
         }
     }
 }
