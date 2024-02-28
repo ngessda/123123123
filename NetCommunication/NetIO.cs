@@ -11,7 +11,11 @@ namespace NetCommunication
         private bool _stopped = false;
         private bool Stopped
         {
+<<<<<<< HEAD
             get 
+=======
+            get
+>>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
             {
                 lock (_lock)
                 {
@@ -76,6 +80,7 @@ namespace NetCommunication
         private string Receive()
         {
             var buffer = new byte[1024];
+<<<<<<< HEAD
             var sBuilder = new StringBuilder();
             do
             {
@@ -91,6 +96,15 @@ namespace NetCommunication
             while (!sBuilder.ToString().EndsWith("=END"));
 
             return sBuilder.ToString();
+=======
+            var count = _socket.Receive(buffer);
+            if (count == 0)
+            {
+                return string.Empty;
+            }
+            var result = Encoding.UTF8.GetString(buffer, 0, count);
+            return result;
+>>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
         }
     }
 }
