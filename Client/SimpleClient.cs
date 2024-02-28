@@ -1,10 +1,4 @@
 ﻿using NetCommunication;
-<<<<<<< HEAD
-=======
-using System;
-using System.Collections.Generic;
-using System.Linq;
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
 using System.Net.Sockets;
 
 namespace Client
@@ -16,7 +10,6 @@ namespace Client
         private Socket clientSocket;
 
         private NetIO net;
-<<<<<<< HEAD
 
         private object _lock = new object();
         private bool _isLogged = false;
@@ -37,8 +30,7 @@ namespace Client
                 }
             }
         }
-=======
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
+
 
         public SimpleClient(string serverHost, int serverPort)
         {
@@ -117,11 +109,6 @@ namespace Client
                         continue;
                     }
                     message = message.Trim();
-<<<<<<< HEAD
-=======
-
-                    net.Send(message);
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
 
                     if (message.ToLower() == "quit")
                     {
@@ -140,7 +127,6 @@ namespace Client
 
         public void Parse(string data)
         {
-<<<<<<< HEAD
             if (data == string.Empty)
             {
                 Console.WriteLine("[Info]: завершение получения сообщений");
@@ -190,10 +176,6 @@ namespace Client
                     Console.WriteLine("[Error]: неизвестная команда");
                     break;
             }
-=======
-            if (data == string.Empty || data == "shutdown") ;
-            net.Stop();
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
         }
     }
 }

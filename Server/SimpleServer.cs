@@ -62,10 +62,6 @@ namespace Server
 
                 acceptingThread.Start();
             }
-<<<<<<< HEAD
-=======
-            Console.WriteLine("Сервер завершил свою работу");
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
         }
     }
 }

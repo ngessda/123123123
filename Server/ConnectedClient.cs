@@ -9,11 +9,8 @@ namespace Server
         private static Dictionary<int, ConnectedClient> _clients = new Dictionary<int, ConnectedClient>();
         private int _id;
 
-<<<<<<< HEAD
         public string? Username { get; private set; } = null;
 
-=======
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
         public ConnectedClient(Socket socket, int id)
         {
             net = new NetIO(socket, this);
@@ -24,7 +21,6 @@ namespace Server
         {
             if (data == string.Empty)
             {
-<<<<<<< HEAD
                 if (Username != null)
                 {
                     lock (_clients)
@@ -133,42 +129,12 @@ namespace Server
                         client.Value.net.Send($"BROADCAST={message}=END");
                     }
                 }
-=======
-                lock (_clients)
-                {
-                    _clients.Remove(_id);
-                }
-                net.Stop();
-                Console.WriteLine("[Clients #{0}]: отключен", _id);
-            }
-
-            var message = data.Trim();
-            Console.WriteLine("[Clients #{0}]: {1}", _id, message);
-
-            if (message == "quit")
-            {
-                lock(_clients)
-                {
-                    _clients.Remove(_id);
-                }
-                net.Send("shutdown");
-                net.Stop();
-                Console.WriteLine("[Clients #{0}]: отключен", _id);
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
             }
         }
-
         public void Start()
         {
             var communication = new Thread(() =>
             {
-<<<<<<< HEAD
-=======
-                lock (_clients)
-                {
-                    _clients.Add(_id, this);
-                }
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
                 net.Communicate();
             });
 
