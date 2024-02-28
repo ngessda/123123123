@@ -76,13 +76,21 @@ namespace NetCommunication
         private string Receive()
         {
             var buffer = new byte[1024];
-            var count = _socket.Receive(buffer);
-            if (count == 0)
+            var sBuilder = new StringBuilder();
+            do
             {
-                return string.Empty;
+                var count = _socket.Receive(buffer);
+                if (count == 0)
+                {
+                    sBuilder.Append(string.Empty);
+                    break;
+                }
+                var result = Encoding.UTF8.GetString(buffer, 0, count);
+                sBuilder.Append(result);
             }
-            var result = Encoding.UTF8.GetString(buffer, 0, count);
-            return result;
+            while (!sBuilder.ToString().EndsWith("=END"));
+
+            return sBuilder.ToString();
         }
     }
 }

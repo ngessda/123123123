@@ -1,10 +1,5 @@
 ﻿using NetCommunication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client
 {
@@ -15,6 +10,26 @@ namespace Client
         private Socket clientSocket;
 
         private NetIO net;
+
+        private object _lock = new object();
+        private bool _isLogged = false;
+        private bool IsLogged
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _isLogged;
+                }
+            }
+            set
+            {
+                lock (_lock)
+                {
+                    _isLogged = value;
+                }
+            }
+        }
 
         public SimpleClient(string serverHost, int serverPort)
         {
@@ -69,7 +84,23 @@ namespace Client
             {
                 while (true)
                 {
-                    Console.WriteLine("Введите сообщение: ");
+                    if (!IsLogged)
+                    {
+                        Console.Write("Введите свой ник: ");
+                        string? data = Console.ReadLine();
+                        if (data == null)
+                        {
+                            continue;
+                        }
+                        data = data.Trim();
+                        net.Send($"LOGIN={data}=END");
+                        lock (_lock)
+                        {
+                            Monitor.Wait(_lock);
+                        }
+                        continue;
+                    }
+                    Console.Write("Введите сообщение: ");
                     string? message = Console.ReadLine();
 
                     if (message == null)
@@ -78,13 +109,16 @@ namespace Client
                     }
                     message = message.Trim();
 
-                    net.Send(message);
-
                     if (message.ToLower() == "quit")
                     {
+                        net.Send("QUIT= =END");
                         net.Stop();
                         Console.WriteLine("[Info]: завершение отправки сообщений");
                         break;
+                    }
+                    else
+                    {
+                        net.Send($"MESSAGE={message}=END");
                     }
                 }
             }
@@ -92,10 +126,54 @@ namespace Client
 
         public void Parse(string data)
         {
-            if (data == string.Empty || data == "shutdown")
+            if (data == string.Empty)
             {
                 Console.WriteLine("[Info]: завершение получения сообщений");
+                if (!IsLogged)
+                {
+                    Console.WriteLine("[Info]: сервер не отвечает - пишите quit");
+                    IsLogged = true;
+                    lock (_lock)
+                    {
+                        Monitor.Pulse(_lock);
+                    }
+                }
                 net.Stop();
+            }
+
+            var splitted = data.Split('=');
+            var command = splitted[0];
+            var inner = splitted[1];
+
+            switch (command)
+            {
+                case "LOGIN":
+                    var loginData = inner.Split(':');
+                    var result = loginData[0];
+                    var reason = loginData[1];
+                    if (result == "failed")
+                    {
+                        Console.WriteLine("[Error]: {0}", reason);
+                        IsLogged = false;
+                    }
+                    else
+                    {
+                        IsLogged = true;
+                        Console.WriteLine("[Info]: {0}", reason);
+                    }
+                    lock (_lock)
+                    {
+                        Monitor.Pulse(_lock);
+                    }
+                    break;
+
+                case "BROADCAST":
+                    Console.WriteLine("\n" + inner);
+                    break;
+
+                default:
+                    Console.WriteLine("[Error]: неизвестная команда");
+                    break;
             }
         }
     }
