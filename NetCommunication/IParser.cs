@@ -8,6 +8,6 @@ namespace NetCommunication
 {
     public interface IParser
     {
-        public void Parse(string data);
+        public void Parse(string? data);
     }
 }

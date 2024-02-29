@@ -57,6 +57,7 @@ namespace Server
                         Console.WriteLine("Соединение с клиентом установлена");
 
                         new ConnectedClient(clientSocket, id).Start();
+                        id++;
                     }
                 });
 

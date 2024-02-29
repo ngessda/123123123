@@ -11,11 +11,8 @@ namespace NetCommunication
         private bool _stopped = false;
         private bool Stopped
         {
-<<<<<<< HEAD
+
             get 
-=======
-            get
->>>>>>> fbbb3548d649a15bd7ae573b1615240b931cbabe
             {
                 lock (_lock)
                 {

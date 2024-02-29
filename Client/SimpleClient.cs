@@ -8,6 +8,24 @@ namespace Client
         private string host;
         private int port;
         private Socket clientSocket;
+        private bool _correctUsername = false;
+        private bool CorrectUsername
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _correctUsername;
+                }
+            }
+            set
+            {
+                lock (_lock)
+                {
+                    _correctUsername = value;
+                }
+            }
+        }
 
         private NetIO net;
 
@@ -121,9 +139,28 @@ namespace Client
                     {
                         net.Send($"MESSAGE={message}=END");
                     }
+
+                    if (message.ToLower() == "private")
+                    {
+
+                        Console.Write("Введите никнейм пользователя: ");
+                        string? data = Console.ReadLine();
+                        if (data == null)
+                        {
+                            Console.WriteLine("Некорректное значение никнейма");
+                            continue;
+                        }
+                        data = data.Trim();
+                        net.Send($"PRIVATE={data}=END");
+
+                        Console.WriteLine("Введите сообщение пользователю {0}: ", data);
+                        var pMessage = Console.ReadLine();
+                        net.Send(pMessage);
+                    }
                 }
             }
         }
+        
 
         public void Parse(string data)
         {
@@ -170,6 +207,26 @@ namespace Client
 
                 case "BROADCAST":
                     Console.WriteLine("\n" + inner);
+                    break;
+
+                case "PRIVATE":
+                    var privateData = inner.Split(":");
+                    var pResult = privateData[0];
+                    var pReason = privateData[1];
+                    if(pResult == "failed")
+                    {
+                        Console.WriteLine("[Error]: {0}", pReason);
+                        CorrectUsername = false;
+                    }
+                    else
+                    {
+                        CorrectUsername = true;
+                        Console.WriteLine("[Info]: {0}", pReason);
+                    }
+                    lock (_lock)
+                    {
+                        Monitor.Pulse(_lock);
+                    }
                     break;
 
                 default:
