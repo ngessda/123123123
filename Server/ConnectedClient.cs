@@ -22,6 +22,8 @@ namespace Server
         {
             string? tempUsername = null;
             string? tempMessage = null;
+            bool flag = false;
+
             if (data == string.Empty)
             {
                 if (Username != null)
@@ -83,42 +85,35 @@ namespace Server
                 case "MESSAGE":
                     Console.WriteLine("[{0}]: {1}", Username, inner);
 
-                    if (inner == "private")
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        SendAllExcept($"[{Username}]: {inner}", this);
-                    }
-
+                    SendAllExcept($"[{Username}]: {inner}", this);
                     break;
 
                 case "PRIVATE":
-                    bool correctedUsername = false;
-                    lock (_clients)
+                    if (!flag)
                     {
-                        foreach (var client in _clients)
+                        foreach(var client in _clients)
                         {
-                            if (client.Value.Username == inner)
+                            if(client.Value.Username == inner)
                             {
-                                correctedUsername = true;
                                 tempUsername = inner;
+                                flag = true;
+                                break;
+                            }
+                            else
+                            {
+                                net.Send("PRIVATE=[Error]: Такого пользователя не существует=END");
                             }
                         }
-                        if (!correctedUsername && !_currentUsername)
-                        {
-                            net.Send("PRIVATE=Введенного пользователя не существует=END");
-                        }
-                        else
-                        {
-                            tempMessage = inner;
-                            var currentKey = _clients.FirstOrDefault(client => client.Value.Username == tempUsername).Key;
-                            _clients[currentKey].net.Send($"private [{Username}]: {tempMessage}");
-                            net.Send("Сообщение было успешно отправлено");
-                        }
-                        break;
                     }
+                    else
+                    {
+                        tempMessage = inner;
+                        var key = _clients.FirstOrDefault(client => client.Value.Username == tempUsername).Key;
+                        _clients[key].net.Send($"PRIVATE=private [{Username}]: {tempMessage}=END");
+                        net.Send("PRIVATE=[Info]: Сообщение успешно отправлено!=END");
+                        flag = false;
+                    }
+                    break;
 
                 default:
                     Console.WriteLine("[Error]: неизвестная команда");

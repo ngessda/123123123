@@ -74,6 +74,7 @@ namespace NetCommunication
             }
         }
 
+
         private string Receive()
         {
             var buffer = new byte[1024];
