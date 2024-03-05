@@ -139,10 +139,9 @@ namespace Client
                     {
                         Console.Write("Введите имя пользователя: ");
                         string? tempUsername = Console.ReadLine();
-                        net.Send($"PRIVATE={tempUsername}=END");
                         Console.Write("Введите сообщение пользователю: ");
                         string? tempMessage = Console.ReadLine();
-                        net.Send($"PRIVATE={tempMessage}=END");
+                        net.Send($"PRIVATE={tempUsername}={tempMessage}=END");
                     }
                     else
                     {

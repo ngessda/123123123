@@ -89,29 +89,30 @@ namespace Server
                     break;
 
                 case "PRIVATE":
-                    if (!flag)
+
+                    var secondInner = splitted[2];
+
+                    foreach (var client in _clients)
                     {
-                        foreach(var client in _clients)
+                        if (client.Value.Username == inner)
                         {
-                            if(client.Value.Username == inner)
-                            {
-                                tempUsername = inner;
-                                flag = true;
-                                break;
-                            }
-                            else
-                            {
-                                net.Send("PRIVATE=[Error]: Такого пользователя не существует=END");
-                            }
+                            tempUsername = inner;
+                            flag = true;
+                            break;
                         }
+
                     }
-                    else
+                    if(flag)
                     {
-                        tempMessage = inner;
+                        tempMessage = secondInner;
                         var key = _clients.FirstOrDefault(client => client.Value.Username == tempUsername).Key;
                         _clients[key].net.Send($"PRIVATE=private [{Username}]: {tempMessage}=END");
                         net.Send("PRIVATE=[Info]: Сообщение успешно отправлено!=END");
                         flag = false;
+                    }
+                    else
+                    {
+                        net.Send("PRIVATE=[Error]: Такого пользователя не существует=END");
                     }
                     break;
 
